@@ -1,0 +1,174 @@
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <button onclick="cycleaddrow()">秀出訂單列表</button>
+        <table width="600px" border="1" cellpadding="0" cellspacing="0" id="myTab2"> 
+                        <tr> 
+                            <td width="40px" class="top-bt liebiao-c" align="center" >myTab2操作</td>
+                            <td width="40px" class="top-bt liebiao-c" align="center" >myTab2序號</td> 
+                            <td class="top-bt liebiao-c" align="center" >myTab2節點名稱</td> 
+                            <td width="80px" class="top-bt liebiao-c" align="center" >myTab2節點比例</td> 
+                        </tr> 
+        </table> 
+<input type="button" name="xx" onclick="addNewRow();" value="增加一行" /> 
+<input type="button" name="yy" onclick="removeRow();" value="刪除一行" /> 
+<input type="button" name="zz" onclick="saveorder();" value="儲存訂單" />
+        <table width="600px" border="1" cellpadding="0" cellspacing="0" id="myTab"> 
+                         <tr> 
+                            <td width="40px"  align="center" >操作</td>
+                            <td width="40px"  align="center" >序號</td> 
+                            <td  align="center" >節點名稱</td> 
+                            <td width="80px"  align="center" >節點比例</td> 
+                         </tr> 
+        </table> 
+<script>
+    var x = [["0","0","0"],["1","2","3"],["","",""]]; //設置一個全域陣列當作資料庫  
+//var y = ["1","2","3","4"]; //設置一個有值得陣列當作測試庫
+     for(var a=1;a<12;a++){ x[a]=[];};    
+    var y = [["1","2"],["2","2"],["3","2"],["4","2"],["5","3"]];
+    var q = 1; //全域序號，給增加欄用的
+    /*-------------取值的概念----------
+      var table=document.getElementById('tabel名稱');
+      table.rows[索引].cells[第幾個欄位].innerHTML
+      以格子中有input為例：
+      table.rows[索引].cells[第幾個欄位].children[0].value
+    */
+   /*
+     select標籤取值
+     分别使用javascript原生的方法
+     code:
+     一：javascript原生的方法
+         1:拿到select对象： var  myselect=document.getElementById("test");
+         2：拿到选中项的索引：var index=myselect.selectedIndex ;             // selectedIndex代表的是你所选中项的index
+         3:拿到选中项options的value：  myselect.options[index].value;
+         4:拿到选中项options的text：  myselect.options[index].text;
+    動態表格取值
+           var table=document.getElementById('tabel名稱');
+           td中值的取得方法為：
+           table.rows[索引].cells[第幾個欄位].innerHTML
+     * */
+    
+             function saveorder(){
+                 var table=document.getElementById("myTab"); //table名字
+                 var rowNum=table.rows.length; //table 行長度
+                 var tt = this.x.length;//全域變數陣列x的長度               
+                 for(var i=1; i<rowNum ; i++){                     
+                     for(var w=1;w <3;w++){
+                          if(w==2){var  myselect=document.getElementById("non"+i);
+                                     var index=myselect.selectedIndex;
+                              this.x[i][w]= myselect.options[index].text;
+                       //  this.x[i].push(myselect.options[index].text);
+                          }else{this.x[i][w]=table.rows[i].cells[w].innerHTML;}
+                              //this.x[i].push(table.rows[i].cells[w].innerHTML);}
+                              //  this.x.length = this.x.length+1;
+                              //tt.push(table.rows[i].cells[w].innerHTML);
+                         
+                                            }}
+                  //存完之後 清除所有的table行            
+                   
+                                    } //要從1開始，才能保留行頭 
+                  
+                                             
+   function addNewRow(){ 
+   var tabObj=document.getElementById("myTab");//獲取新增資料的表格
+   var rowsNum = tabObj.rows.length;  //獲取當前行數 
+   var colsNum=tabObj.rows[rowsNum-1].cells.length;//獲取行的列數 
+   var myNewRow = tabObj.insertRow(rowsNum);//插入新行 
+   var newTdObj1=myNewRow.insertCell(0); 
+   newTdObj1.innerHTML="<input type='checkbox' name='chkArr' id='chkArr'"+rowsNum+" style='width:20px' />"; 
+   var newTdObj2=myNewRow.insertCell(1); 
+ newTdObj2.innerHTML="<input type='text' name='nodecode' id='nodecode'" +rowsNum+" style='width:40px' value='"+11+"'/>"; 
+   var newTdObj3=myNewRow.insertCell(2); 
+   newTdObj3.innerHTML="<select type='text' name='nodename' id='123'"+rowsNum+" style='width:400px' />";  
+        var aaId = document.getElementById("123");; //把id指向一個變數  
+        aaId.id = "non"+q;//重新設定id,使用全域序號防重覆操作下的bug
+        var aaId2 = aaId.id;
+        this.q = q+1;
+   var newTdObj4=myNewRow.insertCell(3); 
+  // newTdObj4.innerHTML="<input type='text' name='nodeper' id='nodeper'"+rowsNum+" style='width:60px' />"; 
+  newTdObj4.innerHTML="<input type='text' maxlength='11' onkeyup=JavaScript:'value=value.replace(/^(0+)|[^\d]+/g,\"\")' />";
+  //newTdObj4.innerHTML = "<input type='text'  id='phone' maxlength='11' onkeyup='if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,\"\")}else{this.value=this.value.replace(/\D/g,\"\")}' />" ;
+   //<input type='text' onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"> // 只允許輸入數字以及防止輸入0開頭的數字轉化
+   //<input onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,‘‘)}else{this.value=this.value.replace(/\D/g,‘‘)}" 
+   //onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,‘‘)}else{this.value=this.value.replace(/\D/g,‘‘)}">
+   var cofeeObj =["美國隊長冰凍咖啡 $35","雷神索爾紅茶 $140","鋼鐵人海景咖啡 $85"]; 
+   //td中值的取得方法為：
+//table.rows[索引].cells[第幾個欄位].innerHTML
+//索引從0開始，會先找到標頭，
+   for(var i=0;i<cofeeObj.length;i++){
+       var option1 = document.createElement("option");  //建立option元素來對應select標籤
+        option1.innerText = cofeeObj[i]; //把內容放進option的內容
+     var parantCity = document.getElementById(aaId2); //利用變數拿到這個單元格
+  　　parantCity.appendChild(option1);
+     }
+    
+  } 
+//視窗表格刪除一行 
+  function removeRow(){ 
+   var chkObj=document.getElementsByName("chkArr"); 
+   var tabObj=document.getElementById("myTab"); 
+   for(var k=0;k<chkObj.length;k++){ 
+    if(chkObj[k].checked){ 
+     tabObj.deleteRow(k+1); 
+     k=-1; 
+    } 
+   } 
+  } 
+     function addNewRow2(){ 
+             var tabObj=document.getElementById("myTab2");//獲取新增資料的表格
+             var rowsNum = tabObj.rows.length;  //獲取當前行數 
+             var colsNum=tabObj.rows[rowsNum-1].cells.length;//獲取行的列數 
+             var myNewRow = tabObj.insertRow(rowsNum);//插入新行 
+             var newTdObj1=myNewRow.insertCell(0); 
+                 newTdObj1.innerHTML="<input type='checkbox' name='chkArr' id='chkArr'"+rowsNum+" style='width:20px' />"; 
+             var newTdObj2=myNewRow.insertCell(1); 
+                 newTdObj2.innerHTML="<input type='text' name='nodecode' id='nodecode'" +rowsNum+ " style='width:40px' />";
+             var newTdObj3 = myNewRow.insertCell(2);
+                 newTdObj3.innerHTML = "<select type='text' name='nodename' id='123'" + rowsNum + " style='width:400px' />";
+                 var aaId = document.getElementById("123");  
+                     aaId.id = "no" + rowsNum;//重新設定id
+                     var aaId2 = aaId.id;
+             var newTdObj4 = myNewRow.insertCell(3);
+                 newTdObj4.innerHTML = "<input type='text' maxlength='11' onkeyup=JavaScript:'value=value.replace(/^(0+)|[^\d]+/g,\"\")' />";
+             var cofeeObj = ["美國隊長冰凍咖啡 $35", "雷神索爾紅茶 $140", "鋼鐵人海景咖啡 $85"];
+             
+             for (var i = 0; i < cofeeObj.length; i++) {
+                var option1 = document.createElement("option");  //建立option元素來對應select標籤
+                option1.innerText = cofeeObj[i]; //把內容放進option的內容
+                var parantCity = document.getElementById(aaId2); //利用變數拿到這個單元格
+                parantCity.appendChild(option1);
+            }
+
+        }
+    function cycleaddrow(){    
+        /*刪除所有行
+           var t=document.getElementById("table1");
+           t.firstChild.removeNode(true)
+         */
+        var tabObj=document.getElementById("myTab2");//獲取新增資料的表格
+        var rowNum=tabObj.rows.length;
+              for (i=1; i<rowNum ; i++){
+                        tabObj.deleteRow(i);
+                        rowNum=rowNum-1;
+                        i=i-1;
+                                    } //要從1開始，才能保留行頭 
+        for(var i=0; i<this.x.length ;i++){
+            this.addNewRow2();
+        } //把表格建立出來
+        for(var i=0 ; i<this.x.length ;i++){
+          for(var w=1 ; w<4 ;w++){
+            tabObj.rows[i+1].cells[w].innerHTML = this.x[i][w]; //陣列一層的放值
+             }
+         }//放值進去
+    }
+
+
+</script>
+
+    </body>
+</html>
