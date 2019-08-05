@@ -1,18 +1,24 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>新訂單到訂單列表</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        <div>新訂單到訂單列表</div>
         <button onclick="cycleaddrow()">秀出訂單列表</button>
         <table width="600px" border="1" cellpadding="0" cellspacing="0" id="myTab2"> 
                         <tr> 
-                            <td width="40px" class="top-bt liebiao-c" align="center" >myTab2操作</td>
-                            <td width="40px" class="top-bt liebiao-c" align="center" >myTab2序號</td> 
-                            <td class="top-bt liebiao-c" align="center" >myTab2節點名稱</td> 
-                            <td width="80px" class="top-bt liebiao-c" align="center" >myTab2節點比例</td> 
+                            <td width="120px" class="top-bt liebiao-c" align="center" >訂單表刪除格</td>
+                            <td width="120px" class="top-bt liebiao-c" align="center" >訂單客戶名</td> 
+                            <td class="top-bt liebiao-c" align="center" >訂單產品</td> 
+                            <td width="80px" class="top-bt liebiao-c" align="center" >待使用</td> 
                         </tr> 
         </table> 
 <input type="button" name="xx" onclick="addNewRow();" value="增加一行" /> 
@@ -20,10 +26,10 @@
 <input type="button" name="zz" onclick="saveorder();" value="儲存訂單" />
         <table width="600px" border="1" cellpadding="0" cellspacing="0" id="myTab"> 
                          <tr> 
-                            <td width="40px"  align="center" >操作</td>
-                            <td width="40px"  align="center" >序號</td> 
-                            <td  align="center" >節點名稱</td> 
-                            <td width="80px"  align="center" >節點比例</td> 
+                            <td width="120px"  align="center" >新訂單刪除格</td>
+                            <td width="120px"  align="center" >新訂單客戶名</td> 
+                            <td  align="center" >新訂單產品</td> 
+                            <td width="80px"  align="center" >待使用</td> 
                          </tr> 
         </table> 
 <script>
@@ -63,7 +69,8 @@
                                      var index=myselect.selectedIndex;
                               this.x[i][w]= myselect.options[index].text;
                        //  this.x[i].push(myselect.options[index].text);
-                          }else{this.x[i][w]=table.rows[i].cells[w].innerHTML;}
+                          }else{ var cell2 = document.getElementById("no2"+i);                               
+                                 this.x[i+rowNum][w]=cell2.value;}
                               //this.x[i].push(table.rows[i].cells[w].innerHTML);}
                               //  this.x.length = this.x.length+1;
                               //tt.push(table.rows[i].cells[w].innerHTML);
@@ -80,9 +87,9 @@
    var colsNum=tabObj.rows[rowsNum-1].cells.length;//獲取行的列數 
    var myNewRow = tabObj.insertRow(rowsNum);//插入新行 
    var newTdObj1=myNewRow.insertCell(0); 
-   newTdObj1.innerHTML="<input type='checkbox' name='chkArr' id='chkArr'"+rowsNum+" style='width:20px' />"; 
+   newTdObj1.innerHTML="<input type='checkbox' name='chkArr' id='chkArr'"+rowsNum+" style='width:120px' />"; 
    var newTdObj2=myNewRow.insertCell(1); 
- newTdObj2.innerHTML="<input type='text' name='nodecode' id='nodecode'" +rowsNum+" style='width:40px' value='"+11+"'/>"; 
+ newTdObj2.innerHTML="<input type='text' name='nodecode' id='nodecode'" +rowsNum+" style='width:120px' value=''/>"; 
    var newTdObj3=myNewRow.insertCell(2); 
    newTdObj3.innerHTML="<select type='text' name='nodename' id='123'"+rowsNum+" style='width:400px' />";  
         var aaId = document.getElementById("123");; //把id指向一個變數  
@@ -125,9 +132,9 @@
              var colsNum=tabObj.rows[rowsNum-1].cells.length;//獲取行的列數 
              var myNewRow = tabObj.insertRow(rowsNum);//插入新行 
              var newTdObj1=myNewRow.insertCell(0); 
-                 newTdObj1.innerHTML="<input type='checkbox' name='chkArr' id='chkArr'"+rowsNum+" style='width:20px' />"; 
+                 newTdObj1.innerHTML="<input type='checkbox' name='chkArr' id='chkArr'"+rowsNum+" style='width:120px' />"; 
              var newTdObj2=myNewRow.insertCell(1); 
-                 newTdObj2.innerHTML="<input type='text' name='nodecode' id='nodecode'" +rowsNum+ " style='width:40px' />";
+                 newTdObj2.innerHTML="<input type='text' name='nodecode' id='nodecode'" +rowsNum+ " style='width:120px' />";
              var newTdObj3 = myNewRow.insertCell(2);
                  newTdObj3.innerHTML = "<select type='text' name='nodename' id='123'" + rowsNum + " style='width:400px' />";
                  var aaId = document.getElementById("123");  
